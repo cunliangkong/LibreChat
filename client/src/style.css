@@ -2815,3 +2815,13 @@ html {
 .sharepoint-picker-bg{
   background-color: #F5F5F5;
 }
+
+/* 背景图样式 - 只占据中间部分并根据菜单弹出收回进行适配 */
+.bg-presentation {
+  background-image: url('/assets/beijing.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: local;
+  min-height: 100vh;
+}

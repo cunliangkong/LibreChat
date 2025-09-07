@@ -60,10 +60,12 @@ function AuthLayout({
     <div className="relative flex min-h-screen flex-col bg-white dark:bg-gray-900">
       <Banner />
       <BlinkAnimation active={isFetching}>
-        <div className="mt-6 h-10 w-full bg-cover">
+        <div className="mt-8 h-24 w-full bg-cover">
+          {' '}
+          {/* 调整高度为 h-24 */}
           <img
-            src="assets/logo.svg"
-            className="h-full w-full object-contain"
+            src="assets/qinghualogin.svg"
+            className="h-full w-full object-contain" // 图片会自动填满新的高度
             alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'LibreChat' })}
           />
         </div>
