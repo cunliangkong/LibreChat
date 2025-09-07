@@ -1,7 +1,7 @@
-import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { easings } from '@react-spring/web';
 import { EModelEndpoint } from 'librechat-data-provider';
-import { BirthdayIcon, TooltipAnchor, SplitText } from '@librechat/client';
+import { BirthdayIcon, TooltipAnchor } from '@librechat/client';
 import { useChatContext, useAgentsMapContext, useAssistantsMapContext } from '~/Providers';
 import { useGetEndpointsQuery, useGetStartupConfig } from '~/data-provider';
 import ConvoIcon from '~/components/Endpoints/ConvoIcon';
@@ -41,6 +41,8 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // 以下代码当前未使用，暂时注释掉
+  /*
   const endpointType = useMemo(() => {
     let ep = conversation?.endpoint ?? '';
     if (
@@ -68,8 +70,11 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
   });
 
   const name = entity?.name ?? '';
-  const description = (entity?.description || conversation?.greeting) ?? '';
+  */
+  const description = conversation?.greeting ?? '';
 
+  // 以下代码当前未使用，暂时注释掉
+  /*
   const getGreeting = useCallback(() => {
     if (typeof startupConfig?.interface?.customWelcome === 'string') {
       const customWelcome = startupConfig.interface.customWelcome;
@@ -138,20 +143,23 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
     return margin;
   }, [lineCount, description, textHasMultipleLines, contentHeight]);
 
-  const greetingText =
+  const greetingText = 
     typeof startupConfig?.interface?.customWelcome === 'string'
       ? getGreeting()
       : getGreeting() + (user?.name ? ', ' + user.name : '');
+  */
 
   return (
+    // ${getDynamicMargin}
     <div
-      className={`flex h-full transform-gpu flex-col items-center justify-center pb-16 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
+      className={`flex h-full transform-gpu flex-col items-center justify-center pb-16 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'}`}
     >
       <div ref={contentRef} className="flex flex-col items-center gap-0 p-2">
         <div
           className={`flex ${textHasMultipleLines ? 'flex-col' : 'flex-col md:flex-row'} items-center justify-center gap-2`}
         >
-          <div className={`relative size-10 justify-center ${textHasMultipleLines ? 'mb-2' : ''}`}>
+          {/* 注释掉原来的图标和标题逻辑 */}
+          {/* <div className={`relative size-10 justify-center ${textHasMultipleLines ? 'mb-2' : ''}`}>
             <ConvoIcon
               agentsMap={agentsMap}
               assistantMap={assistantMap}
@@ -201,7 +209,11 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
               rootMargin="0px"
               onLineCountChange={handleLineCountChange}
             />
-          )}
+          )} */}
+          {/* 替换为biaoti.svg图片 */}
+          <div className="flex flex-col items-center gap-0 p-2">
+            <img src="/assets/biaoti.svg" alt="标题" className="h-auto max-w-full" />
+          </div>
         </div>
         {description && (
           <div className="animate-fadeIn mt-4 max-w-md text-center text-sm font-normal text-text-primary">

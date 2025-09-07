@@ -118,6 +118,8 @@ const MessageRender = memo(
       latestCard: isLatestCard ? 'bg-surface-secondary' : '',
       cardRender: showCardRender ? 'cursor-pointer transition-colors duration-300' : '',
       focus: 'focus:outline-none focus:ring-2 focus:ring-border-xheavy',
+      firstCardBackground: isCard && !isMultiMessage ? 'bg-[url(/assets/ditu1.svg)] bg-cover bg-no-repeat' : '',
+      secondCardBackground: isCard && isMultiMessage ? 'bg-[url(/assets/ditu2.svg)] bg-cover bg-no-repeat' : '',
     };
 
     return (
@@ -130,6 +132,8 @@ const MessageRender = memo(
           conditionalClasses.latestCard,
           conditionalClasses.cardRender,
           conditionalClasses.focus,
+          conditionalClasses.firstCardBackground,
+          conditionalClasses.secondCardBackground,
           'message-render',
         )}
         onClick={clickHandler}
