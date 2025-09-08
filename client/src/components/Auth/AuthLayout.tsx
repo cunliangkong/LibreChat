@@ -60,15 +60,13 @@ function AuthLayout({
     <div className="relative flex min-h-screen flex-col bg-white dark:bg-gray-900">
       <Banner />
       <BlinkAnimation active={isFetching}>
-        <div className="mt-8 h-24 w-full bg-cover">
-          {' '}
-          {/* 调整高度为 h-24 */}
+        {/* <div className="mt-4 h-24 w-full bg-cover">
           <img
             src="assets/qinghualogin.svg"
-            className="h-full w-full object-contain" // 图片会自动填满新的高度
+            className="h-full w-full object-contain"
             alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'LibreChat' })}
           />
-        </div>
+        </div> */}
       </BlinkAnimation>
       <DisplayError />
       <div className="absolute bottom-0 left-0 md:m-4">
@@ -77,14 +75,21 @@ function AuthLayout({
 
       <div className="flex flex-grow items-center justify-center">
         <div className="w-authPageWidth overflow-hidden bg-white px-6 py-4 dark:bg-gray-900 sm:max-w-md sm:rounded-lg">
-          {!hasStartupConfigError && !isFetching && (
-            <h1
-              className="mb-4 text-center text-3xl font-semibold text-black dark:text-white"
-              style={{ userSelect: 'none' }}
-            >
-              {header}
-            </h1>
-          )}
+        {!hasStartupConfigError && !isFetching && (
+  <h1
+    className="mb-4 text-center text-3xl font-semibold text-black dark:text-white flex flex-col items-center justify-center"
+    style={{ userSelect: 'none', gap: '0.5rem' }}
+  >
+    <div className="h-24 w-full bg-cover">
+      <img
+        src="assets/qinghualogo.svg"
+        className="h-full w-full object-contain"
+        alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'LibreChat' })}
+      />
+    </div>
+    <span className="text-2xl mt-9">{header}</span>
+  </h1>
+)}
           {children}
           {!pathname.includes('2fa') &&
             (pathname.includes('login') || pathname.includes('register')) && (
