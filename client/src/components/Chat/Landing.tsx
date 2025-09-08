@@ -211,9 +211,10 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
             />
           )} */}
           {/* 替换为biaoti.svg图片 */}
-          <div className="flex flex-col items-center gap-0 p-2">
-            <img src="/assets/biaoti.svg" alt="标题" className="h-auto max-w-full" />
-          </div>
+          <div className="flex flex-row items-center gap-4 p-2">
+  <img src="/assets/qinghualogo.svg" alt="标题" className="h-auto mr-6 max-w-full scale-105" />
+  <img src="/assets/biaoti.svg" alt="标题" className="h-auto max-w-full scale-105" />
+</div>
         </div>
         {description && (
           <div className="animate-fadeIn mt-4 max-w-md text-center text-sm font-normal text-text-primary">
