@@ -120,8 +120,14 @@ const ContentRender = memo(
       latestCard: isLatestCard ? 'bg-surface-secondary' : '',
       cardRender: showCardRender ? 'cursor-pointer transition-colors duration-300' : '',
       focus: 'focus:outline-none focus:ring-2 focus:ring-border-xheavy',
-      firstCardBackground: isCard && !isMultiMessage ? 'absolute inset-0 bg-[url(/assets/ditu1.svg)] bg-[length:100%_auto] z-0' : '',
-      secondCardBackground: isCard && isMultiMessage ? 'absolute inset-0 bg-[url(/assets/ditu2.svg)] bg-[length:100%_auto] z-0' : '',
+      firstCardBackground:
+        isCard && !isMultiMessage
+          ? 'absolute inset-0 bg-[url(/assets/ditu1.svg)] bg-[length:100%_auto] z-0'
+          : '',
+      secondCardBackground:
+        isCard && isMultiMessage
+          ? 'absolute inset-0 bg-[url(/assets/ditu2.svg)] bg-[length:100%_auto] z-0'
+          : '',
     };
 
     return (
@@ -145,10 +151,10 @@ const ContentRender = memo(
         role={showCardRender ? 'button' : undefined}
         tabIndex={showCardRender ? 0 : undefined}
       >
-        {(isCard && !isMultiMessage) && (
+        {isCard && !isMultiMessage && (
           <div className={conditionalClasses.firstCardBackground}></div>
         )}
-        {(isCard && isMultiMessage) && (
+        {isCard && isMultiMessage && (
           <div className={conditionalClasses.secondCardBackground}></div>
         )}
 
@@ -167,7 +173,7 @@ const ContentRender = memo(
           <h2 className={cn('select-none font-semibold', fontSize)}>{messageLabel}</h2>
 
           <div className="flex flex-col gap-1">
-            <div className="flex max-w-full flex-grow flex-col gap-0 relative">
+            <div className="relative flex max-w-full flex-grow flex-col gap-0">
               <ContentParts
                 edit={edit}
                 isLast={isLast}
@@ -183,11 +189,16 @@ const ContentRender = memo(
                 content={msg.content as Array<TMessageContentParts | undefined>}
               />
               {!isCard && (
-                <img
-                  src="/assets/Group23.svg"
-                  alt="shan icon"
-                  className="absolute -bottom-10 -right-12 w-22 h-20 text-gray-500 pointer-events-none select-none z-10"
-                />
+                <div
+                  className="pointer-events-none absolute inset-0 -z-10 select-none overflow-visible"
+                  aria-hidden="true"
+                >
+                  <img
+                    src="/assets/Group23.svg"
+                    alt=""
+                    className="w-22 absolute -bottom-10 -right-12 h-20 opacity-70"
+                  />
+                </div>
               )}
             </div>
 
