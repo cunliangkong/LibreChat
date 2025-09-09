@@ -109,7 +109,7 @@ const ContentRender = memo(
     }
 
     const baseClasses = {
-      common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu ',
+      common: 'group mx-auto flex flex-1 gap-3 transition-all duration-300 transform-gpu relative',
       card: 'relative w-full gap-1 rounded-lg border border-border-medium bg-surface-primary-alt p-2 md:w-1/2 md:gap-3 md:p-4',
       chat: maximizeChatSpace
         ? 'w-full max-w-full md:px-5 lg:px-1 xl:px-5'
@@ -120,8 +120,8 @@ const ContentRender = memo(
       latestCard: isLatestCard ? 'bg-surface-secondary' : '',
       cardRender: showCardRender ? 'cursor-pointer transition-colors duration-300' : '',
       focus: 'focus:outline-none focus:ring-2 focus:ring-border-xheavy',
-      firstCardBackground: isCard && !isMultiMessage ? 'bg-[url(/assets/ditu1.svg)] bg-cover bg-no-repeat' : '',
-      secondCardBackground: isCard && isMultiMessage ? 'bg-[url(/assets/ditu2.svg)] bg-cover bg-no-repeat' : '',
+      firstCardBackground: isCard && !isMultiMessage ? 'absolute inset-0 bg-[url(/assets/ditu1.svg)] bg-[length:100%_auto] z-0' : '',
+      secondCardBackground: isCard && isMultiMessage ? 'absolute inset-0 bg-[url(/assets/ditu2.svg)] bg-[length:100%_auto] z-0' : '',
     };
 
     return (
@@ -135,8 +135,6 @@ const ContentRender = memo(
           conditionalClasses.cardRender,
           conditionalClasses.focus,
           'message-render',
-          conditionalClasses.firstCardBackground,
-          conditionalClasses.secondCardBackground,
         )}
         onClick={clickHandler}
         onKeyDown={(e) => {
@@ -147,8 +145,11 @@ const ContentRender = memo(
         role={showCardRender ? 'button' : undefined}
         tabIndex={showCardRender ? 0 : undefined}
       >
-        {isLatestCard && (
-          <div className="absolute right-0 top-0 m-2 h-3 w-3 rounded-full bg-text-primary" />
+        {(isCard && !isMultiMessage) && (
+          <div className={conditionalClasses.firstCardBackground}></div>
+        )}
+        {(isCard && isMultiMessage) && (
+          <div className={conditionalClasses.secondCardBackground}></div>
         )}
 
         <div className="relative flex flex-shrink-0 flex-col items-center">
@@ -181,15 +182,13 @@ const ContentRender = memo(
                 conversationId={conversation?.conversationId}
                 content={msg.content as Array<TMessageContentParts | undefined>}
               />
-              {
-                !isCard  && (
-                   <img
-    src="/assets/Group23.svg"
-    alt="shan icon"
-    className="absolute -bottom-10 -right-12 w-22 h-20 text-gray-500 pointer-events-none select-none z-10"
-  />
-                )
-              }
+              {!isCard && (
+                <img
+                  src="/assets/Group23.svg"
+                  alt="shan icon"
+                  className="absolute -bottom-10 -right-12 w-22 h-20 text-gray-500 pointer-events-none select-none z-10"
+                />
+              )}
             </div>
 
             {(isSubmittingFamily || isSubmitting) && !(msg.children?.length ?? 0) ? (
