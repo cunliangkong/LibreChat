@@ -18,7 +18,7 @@ const MessageContainer = React.memo(
   }) => {
     return (
       <div
-        className="text-token-text-primary w-full border-0 bg-transparent dark:border-0 dark:bg-transparent"
+        className="text-token-text-primary w-2/3 mx-auto border-0 bg-transparent dark:border-0 dark:bg-transparent"
         onWheel={handleScroll}
         onTouchMove={handleScroll}
       >

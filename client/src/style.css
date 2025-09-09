@@ -1755,15 +1755,6 @@ html {
     skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
     scaleY(var(--tw-scale-y));
 }
-body,
-html {
-  height: 100%;
-  background-image: url('/assets/beijing.png');
-  background-size: 100% auto; 
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
 .dark body,
 .dark html {
   --tw-bg-opacity: 1;

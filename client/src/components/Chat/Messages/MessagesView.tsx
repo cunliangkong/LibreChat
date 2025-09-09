@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { CSSTransition } from 'react-transition-group';
 import type { TMessage } from 'librechat-data-provider';
@@ -29,6 +29,19 @@ export default function MessagesView({
   } = useMessageScrolling(_messagesTree);
 
   const { conversationId } = conversation ?? {};
+  useEffect(() => {
+    // 保存原始的背景图和背景颜色样式
+    const originalBackgroundImage = document.body.style.backgroundImage;
+    const originalBackgroundColor = document.body.style.backgroundColor;
+    // 设置body为纯白色背景
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = 'white';
+    // 在组件卸载时恢复原始的背景样式
+    return () => {
+      document.body.style.backgroundImage = originalBackgroundImage;
+      document.body.style.backgroundColor = originalBackgroundColor;
+    };
+  }, []);
 
   return (
     <>
